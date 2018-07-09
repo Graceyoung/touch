@@ -1,0 +1,135 @@
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+	img{
+		width: 830px;
+	}
+        #area{
+            background: rgba(0,0,0,.3);
+            z-index: 999;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+	</style>
+</head>
+<body>
+	<div id="area" class="picture-area">
+      <img id="img" src="1.jpg">
+    </div>
+    <script src="jquery-1.9.1.min.js"></script>
+    <script>
+        $(function () {
+           $('#img').on('touchstart',function (e) {
+               picTouchDown(e);
+           })
+            $('#img').on('touchmove',function (e) {
+                picTouchMove(e)
+            })
+            $('#area').on('touchend',function (e) {
+                picTouchUp(e)
+            })
+        })
+        function getXY(e) {
+            var _e = false;
+            var _e2 = false;
+            var e2_xy;
+            if (e.targetTouches || e.changedTouches || e.touches) {
+                if (e.targetTouches[0] !== undefined) {
+                    _e = e.originalEvent.targetTouches[0]
+                } else if (e.changedTouches[0] !== undefined) {
+                    _e = e.originalEvent.changedTouches[0]
+                } else if (e.touches[0] !== undefined) {
+                    _e = e.originalEvent.touches[0]
+                }
+                if(e.targetTouches[1] !== undefined){
+                    _e2 = e.originalEvent.targetTouches[1];
+                } else if (e.changedTouches[1] !== undefined) {
+                    _e2 = e.originalEvent.changedTouches[1];
+                } else if (e.touches[1] !== undefined) {
+                    _e2 = e.originalEvent.touches[1];
+                }
+            }
+            if (!_e) { _e = e }
+            if (!_e2) {
+                e2_xy = null;
+            } else {
+                e2_xy = {
+                    x: _e2.pageX,
+                    y:_e2.pageY
+                };
+            }
+            return {
+                e1: {
+                    x: _e.pageX,
+                    y: _e.pageY
+                },
+                e2: e2_xy
+            }
+        }
+        var togglePicX = 0;
+        var scalePicXY;
+        var scalePicture;
+        var flag = true;
+        var scalePicTransformOrigin = {
+            x: '50%',
+            y: '50%'
+        }
+	  function picTouchDown(e) {
+            // alert(e.originalEvent.targetTouches.length);
+          // togglePicX =  e.originalEvent.targetTouches[0].pageX;
+    	if ( getXY(e).e2 == null) {
+			 togglePicX =  e.originalEvent.targetTouches[0].pageX;
+			 flag = true;
+		}else {
+			 scalePicXY =  getXY(e);
+			 flag = false;
+		}
+	  }
+	  function picTouchMove(e) {
+    	if ( getXY(e).e2 != null) {
+    		var moveX1 =  getXY(e).e1.x -  scalePicXY.e1.x;
+    		var moveX2 =  getXY(e).e2.x -  scalePicXY.e2.x;
+    		var moveY1 =  getXY(e).e1.y -  scalePicXY.e1.y;
+    		var moveY2 =  getXY(e).e1.y -  scalePicXY.e2.y;
+    		var gapxMove = Math.abs( getXY(e).e1.x -  getXY(e).e2.x);
+    		var gapyMove = Math.abs( getXY(e).e1.y -  getXY(e).e2.y);
+    		var gapxStart = Math.abs( scalePicXY.e1.x -  scalePicXY.e2.x);
+    		var gapyStart = Math.abs( scalePicXY.e1.y -  scalePicXY.e2.y);
+    		var scaleX = gapxMove - gapxStart;
+    		var scaleY = gapyMove - gapxStart;
+    		var temp;
+    		if (scaleX !== 0) {
+    			temp = 1 + gapxMove / gapxStart;
+    			 scalePicture = temp > 0 ? temp : 1;
+			} else if (scaleY !== 0) {
+				temp = 1 + gapyMove / gapyStart;
+				 scalePicture = temp > 0 ? temp : 1;
+			}else {
+    			return;
+			}
+			 scalePicTransformOrigin.x =  scalePicXY.e1.x + gapxStart / 2;
+			 scalePicTransformOrigin.y =  scalePicXY.e1.y + gapyStart / 2;
+			 $('#img').css({'transform-origin':scalePicTransformOrigin.x+' '+scalePicTransformOrigin.y,'transform':'scale('+scalePicture+')'})
+		}
+	  }
+	  function picTouchUp(e) {
+    	if ( flag) {
+			var moveX =  e.originalEvent.changedTouches[0].pageX -  togglePicX;
+			// var bigPicLen =  bigPictures.length;
+			// 左滑 <0;右滑 >0
+			if(moveX < 0){
+				$('#img').attr('src','3.jpg')
+			}else if(moveX > 0){
+				$('#img').attr('src','1.jpg')
+			}else{
+				return;
+			}
+		}
+	  }
+    </script>
+</body>
+</html>
