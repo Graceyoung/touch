@@ -22,13 +22,13 @@
     <script src="jquery-1.9.1.min.js"></script>
     <script>
         $(function () {
-           $('#area').on('touchstart',function (e) {
+           $('#img').on('touchstart',function (e) {
                picTouchDown(e);
            })
-            $('#area').on('touchmove',function (e) {
+            $('#img').on('touchmove',function (e) {
                 picTouchMove(e)
             })
-            $('#area').on('touchend',function (e) {
+            $('#img').on('touchend',function (e) {
                 picTouchUp(e)
             })
         })
