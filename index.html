@@ -20,14 +20,16 @@
 	<div id="area" class="picture-area">
       <img id="img" src="1.jpg">
 		<div id="txt"></div>
+		<div id="down"></div>
+		<div id="len"></div>
     </div>
     <script src="jquery-1.9.1.min.js"></script>
     <script>
         $(function () {
-           $('#img').on('touchstart',function (e) {
+           $('#area').on('touchstart',function (e) {
                picTouchDown(e);
            })
-            $('#img').on('touchmove',function (e) {
+            $('#area').on('touchmove',function (e) {
                 picTouchMove(e)
             })
             $('#area').on('touchend',function (e) {
@@ -79,9 +81,14 @@
             x: '50%',
             y: '50%'
         }
+	var downLen;
 	  function picTouchDown(e) {
             // alert(e.originalEvent.targetTouches.length);
           // togglePicX =  e.originalEvent.targetTouches[0].pageX;
+		  downLen= e.originalEvent.touches.length;
+		  var html = '<p>touch down len = '+downLen+'</p>'
+		  $('#down').html(html);
+		  
     	if ( getXY(e).e2 == null) {
 			 togglePicX =  e.originalEvent.targetTouches[0].pageX;
 			
@@ -91,6 +98,8 @@
 		}
 	  }
 	  function picTouchMove(e) {
+		  console.log('downLen when move:',downLen);
+		  var h = '<p>downLen when move:'+downLen+'</p>';
 		  var touches = e.originalEvent.touches;
 		  var len = touches.length;
 		  var html = '<p>touch length='+len+'<p>';
