@@ -57,8 +57,8 @@
                 e2_xy = null;
             } else {
                 e2_xy = {
-                    x: e.originalEvent.touches[1].pageX,
-                    y: e.originalEvent.touches[1].pageY
+                    x: e.originalEvent.changedTouches[1].pageX,
+                    y: e.originalEvent.changedTouches[1].pageY
                 };
             }
 		console.log(e.originalEvent.touches);
@@ -66,8 +66,8 @@
 		console.log(e.originalEvent.changedTouches);
             return {
                 e1: {
-                    x: e.originalEvent.touches[0].pageX,
-                    y: e.originalEvent.touches[0].pageY
+                    x: e.originalEvent.changedTouches[0].pageX,
+                    y: e.originalEvent.changedTouches[0].pageY
                 },
                 e2: e2_xy
             }
