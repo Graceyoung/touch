@@ -19,6 +19,7 @@
 <body>
 	<div id="area" class="picture-area">
       <img id="img" src="1.jpg">
+		<div id="txt"></div>
     </div>
     <script src="jquery-1.9.1.min.js"></script>
     <script>
@@ -90,6 +91,9 @@
 		}
 	  }
 	  function picTouchMove(e) {
+		  var touches = e.originalEvent.touches;
+		  console.log(touches);
+		  console.log(touches.length);
     	if ( getXY(e).e2 != null) {
     		var moveX1 =  getXY(e).e1.x -  scalePicXY.e1.x;
     		var moveX2 =  getXY(e).e2.x -  scalePicXY.e2.x;
