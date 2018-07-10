@@ -100,10 +100,7 @@
 		  console.log(touches.length);
 		 
     	if ( downLen >1) {
-    		var moveX1 =  getXY(e).e1.x -  scalePicXY.e1.x;
-    		var moveX2 =  getXY(e).e2.x -  scalePicXY.e2.x;
-    		var moveY1 =  getXY(e).e1.y -  scalePicXY.e1.y;
-    		var moveY2 =  getXY(e).e1.y -  scalePicXY.e2.y;
+    		
     		var gapxMove = Math.abs( getXY(e).e1.x -  getXY(e).e2.x);
     		var gapyMove = Math.abs( getXY(e).e1.y -  getXY(e).e2.y);
     		var gapxStart = Math.abs( scalePicXY.e1.x -  scalePicXY.e2.x);
