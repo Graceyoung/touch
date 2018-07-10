@@ -69,7 +69,7 @@
                 e2: e2_xy
             }
         }
-        var togglePicX = 0;
+        
         var scalePicXY;
         var scalePicture;
         var flag = true;
@@ -84,14 +84,9 @@
 		  downLen= e.originalEvent.touches.length;
 		  var html = '<p>touch down len update = '+downLen+'</p>'
 		  $('#down').html(html);
+		  this.scalePicXY = this.getXY(e);
 		  
-    	if ( getXY(e).e2 == null) {
-			 togglePicX =  e.originalEvent.targetTouches[0].pageX;
-			
-		}else {
-			 scalePicXY =  getXY(e);
-			 
-		}
+    	
 	  }
 	  function picTouchMove(e) {
 		  console.log('downLen when move:',downLen);
@@ -133,7 +128,7 @@
 	  }
 	  function picTouchUp(e) {
     	if ( downLen < 2) {
-			var moveX =  e.originalEvent.changedTouches[0].pageX -  togglePicX;
+			var moveX =  getXY(e).e1.x -  scalePicXY.e1.x;
 			// var bigPicLen =  bigPictures.length;
 			// 左滑 <0;右滑 >0
 			if(moveX < 0){
