@@ -86,7 +86,7 @@
             // alert(e.originalEvent.targetTouches.length);
           // togglePicX =  e.originalEvent.targetTouches[0].pageX;
 		  downLen= e.originalEvent.touches.length;
-		  var html = '<p>touch down len = '+downLen+'</p>'
+		  var html = '<p>touch down len update = '+downLen+'</p>'
 		  $('#down').html(html);
 		  
     	if ( getXY(e).e2 == null) {
@@ -136,7 +136,7 @@
 	}
 	  }
 	  function picTouchUp(e) {
-    	if ( downLen > 1) {
+    	if ( downLen < 2) {
 			var moveX =  e.originalEvent.changedTouches[0].pageX -  togglePicX;
 			// var bigPicLen =  bigPictures.length;
 			// 左滑 <0;右滑 >0
