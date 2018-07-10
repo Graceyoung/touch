@@ -3,11 +3,11 @@
 	<title></title>
 	<style type="text/css">
 	img{
-		width: 300px;
+		width: 100%;
 	}
         #area{
             background: rgba(0,0,0,.3);
-            width: 300px;
+            width: 50%;
 		height:100%;
         }
 	</style>
@@ -83,7 +83,7 @@
           // togglePicX =  e.originalEvent.targetTouches[0].pageX;
 		  scalePicXY = getXY(e);
 		  downLen= e.originalEvent.touches.length;
-		  var html = '<p>touch down len new= '+downLen+'</p>'
+		  var html = '<p>touch down len after= '+downLen+'</p>'
 		  $('#down').html(html);
 		  
 		  
