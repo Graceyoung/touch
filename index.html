@@ -128,7 +128,8 @@
 		  console.log('panduan before');
     	if ( downLen < 2) {
 		console.log('huadong');
-			var moveX =  getXY(e).e1.x -  scalePicXY.e1.x;
+		console.log(scalePicXY);
+			var moveX =  e.originalEvent.changedTouches[0].pageX -  scalePicXY.e1.x;
 		console.log(getXY(e).e1.x);
 		console.log(scalePicXY.e1.x);
 		console.log('moveX',moveX);
