@@ -92,6 +92,9 @@
 	  }
 	  function picTouchMove(e) {
 		  var touches = e.originalEvent.touches;
+		  var len = touches.length;
+		  var html = '<p>touch len:'+len+'<p>';
+		  $('#txt').html(html);
 		  console.log(touches);
 		  console.log(touches.length);
     	if ( getXY(e).e2 != null) {
