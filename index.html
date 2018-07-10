@@ -126,13 +126,16 @@
 	  }
 	  function picTouchUp(e) {
     	if ( downLen < 2) {
+		console.log('huadong');
 			var moveX =  getXY(e).e1.x -  scalePicXY.e1.x;
 			// var bigPicLen =  bigPictures.length;
 			// 左滑 <0;右滑 >0
 			if(moveX < 0){
-				$('#img').attr('src','3.jpg')
+				$('#img').attr('src','3.jpg');
+				console.log('zuohua');
 			}else if(moveX > 0){
 				$('#img').attr('src','1.jpg')
+				console.log('youhua');
 			}else{
 				return;
 			}
