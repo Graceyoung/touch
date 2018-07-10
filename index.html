@@ -84,20 +84,21 @@
           // togglePicX =  e.originalEvent.targetTouches[0].pageX;
     	if ( getXY(e).e2 == null) {
 			 togglePicX =  e.originalEvent.targetTouches[0].pageX;
-			 flag = true;
+			
 		}else {
 			 scalePicXY =  getXY(e);
-			 flag = false;
+			 
 		}
 	  }
 	  function picTouchMove(e) {
 		  var touches = e.originalEvent.touches;
 		  var len = touches.length;
-		  var html = '<p>touch len:'+len+'<p>';
+		  var html = '<p>touch length='+len+'<p>';
 		  $('#txt').html(html);
 		  console.log(touches);
 		  console.log(touches.length);
-    	if ( getXY(e).e2 != null) {
+		 
+    	if ( e.originalEvent.touches.length>1) {
     		var moveX1 =  getXY(e).e1.x -  scalePicXY.e1.x;
     		var moveX2 =  getXY(e).e2.x -  scalePicXY.e2.x;
     		var moveY1 =  getXY(e).e1.y -  scalePicXY.e1.y;
@@ -121,7 +122,10 @@
 			 scalePicTransformOrigin.x =  scalePicXY.e1.x + gapxStart / 2;
 			 scalePicTransformOrigin.y =  scalePicXY.e1.y + gapyStart / 2;
 			 $('#img').css({'transform-origin':scalePicTransformOrigin.x+' '+scalePicTransformOrigin.y,'transform':'scale('+scalePicture+')'})
-		}
+		flag = false;	
+	}else{
+		flag = true;
+	}
 	  }
 	  function picTouchUp(e) {
     	if ( flag) {
