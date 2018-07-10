@@ -100,6 +100,7 @@
 	  function picTouchMove(e) {
 		  console.log('downLen when move:',downLen);
 		  var h = '<p>downLen when move:'+downLen+'</p>';
+		  $('#len').html(h);
 		  var touches = e.originalEvent.touches;
 		  var len = touches.length;
 		  var html = '<p>touch length='+len+'<p>';
