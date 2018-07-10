@@ -82,15 +82,15 @@
             // alert(e.originalEvent.targetTouches.length);
           // togglePicX =  e.originalEvent.targetTouches[0].pageX;
 		  downLen= e.originalEvent.touches.length;
-		  var html = '<p>touch down len update = '+downLen+'</p>'
+		  var html = '<p>touch down len = '+downLen+'</p>'
 		  $('#down').html(html);
 		  this.scalePicXY = this.getXY(e);
 		  
     	
 	  }
 	  function picTouchMove(e) {
-		  console.log('downLen when move:',downLen);
-		  var h = '<p>downLen when move update:'+downLen+'</p>';
+		  console.log('downLen when move update:',downLen);
+		  var h = '<p>downLen when move:'+downLen+'</p>';
 		  $('#len').html(h);
 		  var touches = e.originalEvent.touches;
 		  var len = touches.length;
