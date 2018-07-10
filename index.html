@@ -62,6 +62,8 @@
                 };
             }
 		console.log(e.originalEvent.touches);
+		console.log(e.originalEvent.targetTouches);
+		console.log(e.originalEvent.changedTouches);
             return {
                 e1: {
                     x: e.originalEvent.touches[0].pageX,
