@@ -129,9 +129,8 @@
     	if ( downLen < 2) {
 		console.log('huadong');
 		console.log(scalePicXY);
-		console.log(e.originalEvent);
-		console.log('originalEventEles',e.originalEvent.changeTouches);
-		console.log('originalEvent',e.originalEvent.changeTouches[0].pageX);
+		console.log(e.originalEvent.changedTouches);
+		console.log('originalEvent',e.originalEvent.changedTouches[0].pageX);
 			var moveX =  e.originalEvent.changedTouches[0].pageX -  scalePicXY.e1.x;
 		console.log(getXY(e).e1.x);
 		console.log(scalePicXY.e1.x);
