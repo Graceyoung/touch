@@ -14,6 +14,7 @@
     -ms-user-select: none;
     user-select: none;
         }
+		
 	</style>
 </head>
 <body>
@@ -22,6 +23,7 @@
 		<div id="txt"></div>
 		<div id="down"></div>
 		<div id="len"></div>
+		<button id="btn">12233</button>
     </div>
     <script src="jquery-1.9.1.min.js"></script>
     <script>
@@ -35,6 +37,9 @@
             $('#img').on('touchend',function (e) {
                 picTouchUp(e)
             })
+		$('#btn').click(function(){
+			alert(11);
+		});
         })
         function getXY(e) {
             var _e = false;
