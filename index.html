@@ -32,7 +32,22 @@
     user-select:none;   
 			pointer-events: none;
 		}
-		
+		#fixLine{
+			width:3px;
+			height:600px;
+			background:red;
+			position:fixed;
+			top:0;
+			left:50%;
+		}
+		#fixImg{
+			width:100px;
+			height:100px;
+			border-radius:50%;
+			position:absolute;
+			top:50%;
+			left:50%;
+		}
 	</style>
 </head>
 <body>
@@ -45,6 +60,9 @@
 		111
 		111
     </div>
+	<div id="fixLine">
+	<img id="fixImg" src="1.jpg">
+	</div>
     <script src="jquery-1.9.1.min.js"></script>
     <script>
         $(function () {
@@ -60,6 +78,12 @@
 		$('#btn').click(function(){
 			alert(11);
 		});
+		$('#fixLine').on('touchstart',function (e) {
+               picTouchDownLine(e);
+           })
+            $('#fixLine').on('touchmove',function (e) {
+                picTouchMoveLine(e)
+            })
         })
         function getXY(e) {
             var _e = false;
@@ -101,7 +125,13 @@
                 e2: e2_xy
             }
         }
-        
+        function picTouchDownLine(e){
+		
+	}
+	    function picTouchMoveLine(e){
+	    	$('#fixImg').css({'left':getXY(e).e1.x});
+		    $('#fixLine').css({'left':getXY(e).e1.x,'top':getXY(e).e1.y});
+	    }
         var scalePicXY;
         var scalePicture;
         var flag = true;
