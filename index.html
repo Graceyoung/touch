@@ -14,7 +14,9 @@
 	}
         #area{
             background: rgba(0,0,0,.3);
-            width: 50%;
+            width:500px;
+		height:500px;
+		position:relative;
 		height:100%;
 		-webkit-touch-callout:none;  /*系统默认菜单被禁用*/   
     -webkit-user-select:none; /*webkit浏览器*/   
@@ -41,12 +43,19 @@
 			left:50%;
 		}
 		#fixImg{
-			width:100px;
-			height:100px;
+			width:400px;
+			height:400px;
 			border-radius:50%;
 			position:absolute;
 			top:50%;
 			left:50%;
+		}
+		#area img{
+		width:500px;
+			height:500px;
+			position:absolute;
+			top:0;
+			left:0;
 		}
 	</style>
 </head>
@@ -60,9 +69,6 @@
 		111
 		111
     </div>
-	<div id="fixLine">
-	<img id="fixImg" src="1.jpg">
-	</div>
     <script src="jquery-1.9.1.min.js"></script>
     <script>
         $(function () {
@@ -151,6 +157,7 @@
 		  
     	
 	  }
+	    var scalePicMoveXY = {x:0,y:0};
 	  function picTouchMove(e) {
 		  console.log('downLen when move update:',downLen);
 		  var h = '<p>downLen when move:'+downLen+'</p>';
@@ -180,10 +187,10 @@
     			scalePicture = temp < 1 ? 1 : temp;
 			} else if (scaleY !== 0) {
 				if (gapyMove > gapyStart) { // 放大
-					temp = scalePicture + gapyMove / gapyStart;
+					temp = scalePicture + gapyMove / gapyStart /10;
 
 				} else { // 缩小
-					temp = scalePicture - gapyMove / gapyStart;
+					temp = scalePicture - gapyMove / gapyStart /10;
 				}
 				scalePicture = temp < 1 ? 1 : temp;
 			}else {
@@ -193,7 +200,47 @@
 			 scalePicTransformOrigin.y =  scalePicXY.e1.y + gapyStart / 2;
 			 $('#img').css({'transform-origin':scalePicTransformOrigin.x+' '+scalePicTransformOrigin.y,'transform':'scale('+scalePicture+')'})
 		
-	}
+	 			let distanceTemp = (scalePicture - 1) * this.fontSize / 2;
+			  let distanceX = distanceTemp * 20.48;
+			  let distanceY = distanceTemp * 15.36;
+			  movePicAfterScaleSmall(distanceX,'x');
+			  movePicAfterScaleSmall(distanceY,'y');
+	}else{
+		  	if (this.scalePicture > 1) {
+		  		let moveXY = getXY(e).e1;
+				movePicAfterScale(moveXY,'y');
+				movePicAfterScale(moveXY,'x');
+			}
+		  }
+	  }
+	   function movePicAfterScaleSmall(distance,xy) {
+		  if (scalePicMoveXY[xy] > distance) {
+			  scalePicMoveXY[xy] = distance;
+		  }else if(scalePicMoveXY[xy] < (-1) * distance) {
+			  scalePicMoveXY[xy] = (-1) * distance;
+		  }
+	  }
+	    function movePicAfterScale(moveXY, xy) {
+		  if (Math.abs(moveXY[xy] - scalePicXY.e1[xy]) > 1) {
+			  let distanceTemp = (scalePicture - 1) * this.fontSize / 2;
+			  let maxMoveDistance = xy === 'x' ? distanceTemp * 20.48 : distanceTemp * 15.36;
+			  let gap = Math.abs(moveXY[xy] - scalePicXY.e1[xy]);
+			  console.log('scale',scalePicture);
+			  if(moveXY[xy] - scalePicXY.e1[xy] > 0){
+				  if (scalePicMoveXY[xy] < maxMoveDistance) {
+					  scalePicMoveXY[xy] = scalePicMoveXY[xy] + gap;
+				  }else{
+				  	this.scalePicMoveXY[xy] = maxMoveDistance;
+				  }
+			  } else {
+				  if (scalePicMoveXY[xy] > (-1) * maxMoveDistance) {
+					  scalePicMoveXY[xy] = scalePicMoveXY[xy] - gap;
+				  }else{
+					  scalePicMoveXY[xy] = (-1) * maxMoveDistance;
+				  }
+			  }
+			  scalePicXY.e1[xy] = moveXY[xy];
+		  }
 	  }
 	  function picTouchUp(e) {
 		  console.log('panduan before');
